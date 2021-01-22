@@ -3,7 +3,9 @@ public class EmpWagesUseCases
 	public static final int IS_PART_TIME = 1;
         public static final int IS_FULL_TIME = 2;
         public static final int EMP_RATE_PER_HR =20;
-	 public static final int NUMBER_OF_WORKING_DAYS = 2;
+	public static final int NUMBER_OF_WORKING_DAYS = 2;
+	public static final int MAX_HRS_IN_MONTH = 10;
+
 
 
 	public static void main (String args[])
@@ -11,12 +13,14 @@ public class EmpWagesUseCases
 	
 		//variable
 		int empHrs=0;
-		int empWage=0;
-		int totalempwage = 0;
+		int totalempHrs = 0;
+		int totalworkingDays = 0;
 
-		//computation of employee attendance
-		for ( int day=0; day<NUMBER_OF_WORKING_DAYS; day++ )
+		//computation for getting total working days of an employee
+		while ( totalempHrs <= MAX_HRS_IN_MONTH && totalworkingDays < NUMBER_OF_WORKING_DAYS )
 		{
+			totalworkingDays++;
+
 			int empCheck =(int) Math.floor(Math.random() * 10) % 2;
 			switch((empCheck))
 			{
@@ -32,10 +36,15 @@ public class EmpWagesUseCases
 					empHrs = 0;
 			}
 
-			empWage= empHrs * EMP_RATE_PER_HR;
-			totalempwage += empWage;
-			System.out.println("Employee Wages: "+empWage);
+			totalworkingDays += empHrs;
+	
+				System.out.println( " Days: " + totalworkingDays + "emp Hrs" + empHrs );
+
 		}
-		System.out.println("Total employee wage  month is: " +totalempwage);
+
+	int totalEmpWage = totalempHrs *  EMP_RATE_PER_HR;
+
+	System.out.println("Total employee wage : " + totalEmpWage);
+
 	}
 }
