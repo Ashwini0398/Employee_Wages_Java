@@ -6,7 +6,7 @@ public class EmpWagesUseCases
 	public static final int NUMBER_OF_WORKING_DAYS = 2;
 	public static final int MAX_HRS_IN_MONTH = 10;
 
-	public static int computeEmpWage()
+	public static int computeEmpWage( String Company,int empRate,int numofdays ,int maxHrs  )
         {
                  //variables
                 int empHrs = 0;
@@ -14,7 +14,7 @@ public class EmpWagesUseCases
                 int totalworkingDays = 0;
 
                 //computation  to get the total working days and total employee wage
-                while ( totalempHrs <= MAX_HRS_IN_MONTH && totalworkingDays < NUMBER_OF_WORKING_DAYS )
+                while ( totalempHrs <= maxHrs && totalworkingDays < numofdays )
                 {
                         totalworkingDays++;
 
@@ -38,7 +38,7 @@ public class EmpWagesUseCases
                                 System.out.println( " Days: " + totalworkingDays + "emp Hrs" + empHrs );
 
                }
-                 int totalEmpWage = totalempHrs *  EMP_RATE_PER_HR;
+                 int totalEmpWage = totalempHrs *  empRate;
 
                 System.out.println("Total employee wage : " + totalEmpWage);
                 return totalEmpWage;
@@ -46,6 +46,7 @@ public class EmpWagesUseCases
 
         public static void main (String[] args)
         {
-                computeEmpWage();
+                computeEmpWage("Relience",20,2,10);
+		computeEmpWage("TCS",10,3,15);
         }
 }
