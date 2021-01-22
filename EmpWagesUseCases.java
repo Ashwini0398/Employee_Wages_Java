@@ -30,6 +30,5 @@ public class EmpWagesUseCases
 
 		empWage= empHrs * EMP_RATE_PER_HR;
 		System.out.println("Employee Wages: "+empWage);
-
 	}
 }
