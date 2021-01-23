@@ -2,13 +2,23 @@ public class EmpWagesUseCases
 {
 	public static final int IS_PART_TIME = 1;
         public static final int IS_FULL_TIME = 2;
-        public static final int EMP_RATE_PER_HR =20;
-	public static final int NUMBER_OF_WORKING_DAYS = 2;
-	public static final int MAX_HRS_IN_MONTH = 10;
+	
+	private final String Company;
+        private final int empRate;
+	private final int numofdays;
+	private final int maxHrs;
 
-	public static int computeEmpWage( String Company,int empRate,int numofdays ,int maxHrs  )
+	public EmpWagesUseCases( String Company,int empRate,int numofdays ,int maxHrs )
+	{
+		this.Company = Company;   //instance variable
+		this.empRate = empRate;
+		this.numofdays = numofdays;
+		this.maxHrs = maxHrs;
+	}
+	
+	private int computeEmpWage( )
         {
-                 //variables
+	        //variables
                 int empHrs = 0;
                 int totalempHrs = 0;
                 int totalworkingDays = 0;
@@ -38,15 +48,15 @@ public class EmpWagesUseCases
                                 System.out.println( " Days: " + totalworkingDays + "emp Hrs" + empHrs );
 
                }
-                 int totalEmpWage = totalempHrs *  empRate;
-
-                System.out.println("Total employee wage : " + totalEmpWage);
-                return totalEmpWage;
+                
+                return totalempHrs * empRate;
         }
 
         public static void main (String[] args)
         {
-                computeEmpWage("Relience",20,2,10);
-		computeEmpWage("TCS",10,3,15);
+        	EmpWagesUseCases dmart = new EmpWagesUseCases("Dmart",20,2,10);
+		EmpWagesUseCases Relience = new EmpWagesUseCases("Relience",10,2,20);
+		System.out.println("total employee wage for a company" + dmart.Company + "is" + dmart.computeEmpWage());
+		System.out.println("total employee wage for a company" + Relience.Company + "is" + Relience.computeEmpWage());
         }
 }
