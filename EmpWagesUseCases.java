@@ -44,6 +44,7 @@ public class EmpWagesUseCases
                         }
 
                                 totalworkingDays += empHrs;
+				totalempHrs=(totalempHrs+empHrs);
 
                                 System.out.println( " Days: " + totalworkingDays + "emp Hrs" + empHrs );
 
