@@ -57,7 +57,8 @@ public class EmpWagesUseCases {
 		return "Total wage for a month of " + COMPANY_NAME + " employee is " + totalWage + "\n";
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) 
+	{
 		EmpWagesUseCases dmart = new EmpWagesUseCases("Dmart", 9, 10, 100);
 		EmpWagesUseCases reliance = new EmpWagesUseCases("Reliance", 6, 20, 150);
 
