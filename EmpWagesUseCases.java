@@ -1,63 +1,70 @@
-public class EmpWagesUseCases
-{
-	public static final int IS_PART_TIME = 1;
-        public static final int IS_FULL_TIME = 2;
-	
-	private final String Company;
-        private final int empRate;
-	private final int numofdays;
-	private final int maxHrs;
+public class EmpWagesUseCases {
+	// class constants
+	static final int PART_TIME = 1;
+	static final int FULL_TIME = 2;
+	// instance constants
+	final String COMPANY_NAME;
+	final int WAGE_PER_HR;
+	final int MAX_WORKING_DAYS;
+	final int MAX_WORKING_HRS;
+	// instance variable
+	int totalWage;
 
-	public EmpWagesUseCases( String Company,int empRate,int numofdays ,int maxHrs )
+	EmpWagesUseCases(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) 
 	{
-		this.Company = Company;   //instance variable
-		this.empRate = empRate;
-		this.numofdays = numofdays;
-		this.maxHrs = maxHrs;
+		COMPANY_NAME = companyName;
+		WAGE_PER_HR = wagePerHr;
+		MAX_WORKING_DAYS = maxWorkingDays;
+		MAX_WORKING_HRS = maxWorkingHrs;
+		totalWage = 0;
 	}
-	
-	private int computeEmpWage( )
-        {
-	        //variables
-                int empHrs = 0;
-                int totalempHrs = 0;
-                int totalworkingDays = 0;
 
-                //computation  to get the total working days and total employee wage
-                while ( totalempHrs <= maxHrs && totalworkingDays < numofdays )
-                {
-                        totalworkingDays++;
+	int getEmpType() {
+		return (int) (Math.random() * 100) % 3;
+	}
 
-                        int empCheck = (int) Math.floor(Math.random() * 10) % 3;
-                        switch(empCheck)
-                        {
-                                case IS_PART_TIME:
-                                        empHrs = 4;
-                                        break;
+	int getWorkingHrs(int empType) {
+		switch (empType) {
+		case FULL_TIME:
+			return 8;
+		case PART_TIME:
+			return 4;
+		default:
+			return 0;
+		}
+	}
 
-                                case IS_FULL_TIME:
-                                        empHrs =  8;
-                                        break;
+	void calculateTotalWage() {
+		System.out.println("Computation of total wage of " + COMPANY_NAME + " employee");
+		System.out.printf("%5s     %5s     %5s     %5s\n", "Day", "Workinghrs", "Wage", "Total working hrs");
+		int workingHrs;
+		for (int day = 1, totalWorkingHrs = 0; day <= MAX_WORKING_DAYS
+				&& totalWorkingHrs <= MAX_WORKING_HRS; day++, totalWorkingHrs += workingHrs) {
+			int empType = getEmpType();
+			workingHrs = getWorkingHrs(empType);
+			int wage = workingHrs * WAGE_PER_HR;
+			totalWage += wage;
+			System.out.printf("%5d       %5d      %5d      %5d\n", day, workingHrs, wage, totalWorkingHrs + workingHrs);
+		}
 
-                                default:
-                                        empHrs = 0;
-                        }
+	}
 
-                                totalworkingDays += empHrs;
-				totalempHrs=(totalempHrs+empHrs);
+	public String toString() {
+		System.out.println("Details of " + COMPANY_NAME + " employee");
+		System.err.println("Wage per hour:" + WAGE_PER_HR);
+		System.out.println("Maximum working days:" + MAX_WORKING_DAYS);
+		System.out.println("Maximum working hours:" + MAX_WORKING_HRS);
+		return "Total wage for a month of " + COMPANY_NAME + " employee is " + totalWage + "\n";
+	}
 
-                                System.out.println( " Days: " + totalworkingDays + "emp Hrs" + empHrs );
+	public static void main(String args[]) {
+		EmpWagesUseCases dmart = new EmpWagesUseCases("Dmart", 9, 10, 100);
+		EmpWagesUseCases reliance = new EmpWagesUseCases("Reliance", 6, 20, 150);
 
-               }
-                
-                return totalempHrs * empRate;
-        }
+		dmart.calculateTotalWage();
+		System.out.println(dmart);
 
-        public static void main (String[] args)
-        {
-        	EmpWagesUseCases dmart = new EmpWagesUseCases("Dmart",20,2,10);
-		EmpWagesUseCases Relience = new EmpWagesUseCases("Relience",10,2,20);
-		System.out.println("total employee wage for a company" + dmart.Company + "is" + dmart.computeEmpWage());
-		System.out.println("total employee wage for a company" + Relience.Company + "is" + Relience.computeEmpWage());
-        }
+		reliance.calculateTotalWage();
+		System.out.println(reliance);
+	}
 }
